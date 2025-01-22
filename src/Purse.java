@@ -1,13 +1,24 @@
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Integer;
 
 
 public class Purse {
-    public static void main(String[] args) {
-    Map cash<Denomination.amt, Integer>             // represents the money in the purse
-    void add(Denomination.amt, int num)                 // adds a number of a particular denomination
-    double remove(Denomination.form, num) //diminishes the money in the purse and returns that amount.
-    double getValue()                           // returns the amount of money in the Purse
-    String toString()                           // returns a string representation of the Purse and its contents
+    Map <Main.Denomination, Integer> cash;             // represents the money in the purse
+
+
+    public Purse() {
+        cash = new HashMap<Main.Denomination, Integer>();
     }
+    public void add(Main.Denomination denom, int num) {
+
+    }                // adds a number of a particular denomination
+    public double remove(Main.Denomination denom, int num) {
+        return 0;
+    } //diminishes the money in the purse and returns that amount.
+    public double getValue() {
+        return 0;
+    }                          // returns the amount of money in the Purse
+    public String toString() {
+        return "";
+    }                         // returns a string representation of the Purse and its contents
 }
