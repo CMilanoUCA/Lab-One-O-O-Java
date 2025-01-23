@@ -1,7 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class Purse {
     Map <Denomination, Integer> cash;             // represents the money in the purse
     public Purse() {
@@ -16,13 +15,15 @@ public class Purse {
         cash.put(denom, num - cash.get(denom));
         return num * denom.amt;
     } //diminishes the money in the purse and returns that amount.
+
     public double getValue() {
         double moneyCount = 0;
         for (Denomination denom : cash.keySet()) {
             moneyCount += cash.get(denom) * denom.amt;
         }
         return moneyCount;
-    }                          // returns the amount of money in the Purse
+    } // returns the amount of money in the Purse
+
     public String toString() {
         String output = "";
         if (getValue() <= 0) {
@@ -34,5 +35,5 @@ public class Purse {
             }
         }
         return output;
-    }                         // returns a string representation of the Purse and its contents
+    } // returns a string representation of the Purse and its contents
 }

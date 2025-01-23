@@ -13,10 +13,10 @@ public class Register {
         }
 
         return p;
-    }       // takes an amt and returns a Purse containing that amount
+    }  // takes an amt and returns a Purse containing that amount
                                           // in the fewest number of bills and coins.static void main(String[] args) {}
     public static void main(String[] args) {
-
+        // Function used to run purse arithmetic
     }
 }
 

@@ -24,13 +24,14 @@ public class RegisterPanel extends javax.swing.JPanel {
         this.add(changePanel);
     }
 
-
     class InputListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
         double amount = Double.parseDouble(input.getText());
         Purse purse = register.makeChange(amount);
-        changePanel.setPurse(purse);
+        changePanel.draw(purse);
+        changePanel.revalidate();
+        changePanel.repaint();
         }
     }  // a listener for changes to the input
 }
