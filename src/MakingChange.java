@@ -9,4 +9,4 @@ public class MakingChange {
     frame.pack();
     frame.setVisible(true);
     }
-}
+}   // Runs the GUI version of the Lab; Can only handle one input at a time.
