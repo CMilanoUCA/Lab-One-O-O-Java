@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RegisterPanel extends javax.swing.JPanel {
+    // Add dropdown changing currency of register
+
     Register register; // a register object to run the logic
     JPanel inputPanel;  // a panel to hold the JTextField for the user to enter an amount
     JTextField input;   // a place for the user to enter the amount

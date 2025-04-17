@@ -1,4 +1,6 @@
 public class Currency {
+    // Factory Pattern Class (makes denominations)
+    //
     public static final Denomination[] US_CURRENCY = {
         new Denomination("One-Hundred-Dollar Note", 100.00, "Bill", "Images/hundreddollar.png"),
         new Denomination("Fifty-Dollar Note", 50.00, "Bill", "Images/fiftydollar.png"),
