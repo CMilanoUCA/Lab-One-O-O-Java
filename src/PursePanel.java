@@ -5,8 +5,6 @@ public class PursePanel extends javax.swing.JPanel {
     Purse purse; // represents the amount to display—initialize to empty Purse
     public void setPurse(Purse p) {
         purse = p;
-        //this.revalidate();
-        //this.repaint();
     }
 
     public void draw(Purse p) {

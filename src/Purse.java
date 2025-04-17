@@ -11,10 +11,15 @@ public class Purse {
      cash.put(denom, num + cash.getOrDefault(denom, 0));
     }                // adds a number of a particular denomination
 
+
     public double remove(Denomination denom, int num) {
-        cash.put(denom, num - cash.get(denom));
+        Integer current = cash.get(denom);
+        if (current == null || current < num) {
+            throw new IllegalArgumentException("Not enough " + denom.name + " in purse");
+        }
+        cash.put(denom, current - num);
         return num * denom.amt;
-    } //diminishes the money in the purse and returns that amount.
+    }
 
     public double getValue() {
         double moneyCount = 0;
@@ -29,11 +34,11 @@ public class Purse {
         if (getValue() <= 0) {
             return "Empty Purse";
         }
-        for (Denomination denom : Currency.US_CURRENCY) {
+        for (Denomination denom : cash.keySet()) {  // Only loop through existing denominations
             if (cash.get(denom) > 0) {
-            output += cash.get(denom) + " "+denom.name + " "+denom.form +"\n";
+                output += cash.get(denom) + " " + denom.name + " " + denom.form + "\n";
             }
         }
         return output;
-    } // returns a string representation of the Purse and its contents
+    }
 }

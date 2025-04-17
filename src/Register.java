@@ -1,25 +1,30 @@
 public class Register {
-    Purse makeChange(double amount) {
-        // Create a new Interface/Class ChangeMaker()
-        // Maybe give makeChange() a Denomination field? for factory
-        // Also get currency before amount calc from CurrencyFactory();
+    private final Denomination[] currency;
 
+    public Register() {
+        this(Currency.CurrencyType.US);  // Default to US currency
+    }
+
+    public Register(Currency.CurrencyType currencyType) {
+        this.currency = Currency.getCurrency(currencyType);  // Factory Pattern Call
+    }
+
+    public Purse makeChange(double amount) {
         Purse p = new Purse();
+        // Change Conversion
+        long cents = Math.round(amount * 100);
+        amount = cents / 100.0;
 
-        amount = amount * 100;
-        long rAmount = Math.round(amount);
-        amount = rAmount / 100.0;
-        for (int i = 0; i < 10; i++) {
-            Denomination d = Currency.US_CURRENCY[i];
-            int moneyCount = (int)(amount/d.amt);
-            amount -= moneyCount * d.amt;
-            p.add(d, moneyCount);
+        for (Denomination d : currency) {
+            if (amount <= 0) break;
+            int moneyCount = (int)(amount / d.amt);
+            if (moneyCount > 0) {
+                amount -= moneyCount * d.amt;
+                p.add(d, moneyCount);
+                // Re-calc to avoid Floating-Point Errors
+                amount = Math.round(amount * 100) / 100.0;
+            }
         }
-
         return p;
-    }  // takes an amt and returns a Purse containing that amount
-                                          // in the fewest number of bills and coins.static void main(String[] args) {}
-
+    }
 }
-
-
