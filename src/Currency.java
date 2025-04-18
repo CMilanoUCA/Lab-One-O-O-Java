@@ -1,10 +1,10 @@
 public class Currency {
     public enum CurrencyType { US, EU, UK }  // Supported currency types
 
-    // Private constructor to prevent instantiation (static factory only)
+    // Private Constructor Preventing Instantiation (Static Factory Only!)
     private Currency() {}
 
-    // Factory method to get denominations for a given currency type
+    // Factory Method to Get Different Denominations
     public static Denomination[] getCurrency(CurrencyType type) {
         switch (type) {
             case US: return getUSDollarDenominations();
@@ -56,14 +56,11 @@ public class Currency {
                 new Denomination("Five-Pound Note", 5.00, "Bill", "Images/fivepound.png"),
                 new Denomination("Two-Pound Coin", 2.00, "Coin", "Images/twopound.png"),
                 new Denomination("One-Pound Coin", 1.00, "Coin", "Images/onepound.png"),
-                new Denomination("Fifty-Pence Coin", 0.50, "Coin", "Images/fiftypee.png"),
-                new Denomination("Twenty-Pence Coin", 0.20, "Coin", "Images/twentypee.png"),
-                new Denomination("Ten-Pence Coin", 0.10, "Coin", "Images/tenpee.png"),
-                new Denomination("Five-Pence Coin", 0.05, "Coin", "Images/fivepee.png"),
-                new Denomination("One-Pence Coin", 0.01, "Coin", "Images/onepee.png")
+                new Denomination("Fifty-Pence Coin", 0.50, "Coin", "Images/fiftypence.png"),
+                new Denomination("Twenty-Pence Coin", 0.20, "Coin", "Images/twentypence.png"),
+                new Denomination("Ten-Pence Coin", 0.10, "Coin", "Images/tenpence.png"),
+                new Denomination("Five-Pence Coin", 0.05, "Coin", "Images/fivepence.png"),
+                new Denomination("One-Pence Coin", 0.01, "Coin", "Images/onepenny.png")
         };
     }
-
-    // Optional: Keep backward compatibility with old US_CURRENCY reference
-    public static final Denomination[] US_CURRENCY = getCurrency(CurrencyType.US);
 }

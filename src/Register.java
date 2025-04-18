@@ -1,30 +1,26 @@
 public class Register {
-    private final Denomination[] currency;
-
-    public Register() {
-        this(Currency.CurrencyType.US);  // Default to US currency
-    }
+    private Denomination[] currency;
+    private ChangeStrategy strategy;
 
     public Register(Currency.CurrencyType currencyType) {
-        this.currency = Currency.getCurrency(currencyType);  // Factory Pattern Call
+        this(currencyType, new GreedyChangeStrategy()); // Default to greedy
+    }
+
+    public Register(Currency.CurrencyType currencyType, ChangeStrategy strategy) {
+        // Factory Pattern Call
+        this.currency = Currency.getCurrency(currencyType);
+        this.strategy = strategy;
+    }
+
+    public void setStrategy(ChangeStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public String getStrategyName() {
+        return strategy.getClass().getSimpleName().replace("ChangeStrategy", "");
     }
 
     public Purse makeChange(double amount) {
-        Purse p = new Purse();
-        // Change Conversion
-        long cents = Math.round(amount * 100);
-        amount = cents / 100.0;
-
-        for (Denomination d : currency) {
-            if (amount <= 0) break;
-            int moneyCount = (int)(amount / d.amt);
-            if (moneyCount > 0) {
-                amount -= moneyCount * d.amt;
-                p.add(d, moneyCount);
-                // Re-calc to avoid Floating-Point Errors
-                amount = Math.round(amount * 100) / 100.0;
-            }
-        }
-        return p;
+        return strategy.makeChange(amount, currency);
     }
 }

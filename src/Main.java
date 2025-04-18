@@ -36,6 +36,13 @@ public class Main {
         int currencyChoice = getValidChoice(scan, currencies.length);
         Currency.CurrencyType selectedCurrency = currencies[currencyChoice - 1];
 
+        // Strategy Selection
+        System.out.println("\nSelect Algorithm:");
+        System.out.println("1. Greedy Algorithm");
+        System.out.println("2. Optimal Algorithm");
+        System.out.print("Enter choice (1-2): ");
+        int strategyChoice = getValidChoice(scan, 2);
+
         // Amount Input
         double amount = 0;
         while (true) {
@@ -52,10 +59,16 @@ public class Main {
         }
 
         // Process and Display Change
+        ChangeStrategy strategy = strategyChoice == 1
+                ? new GreedyChangeStrategy()
+                : new OptimalChangeStrategy();
+
         Register register = new Register(selectedCurrency);
         Purse purse = register.makeChange(amount);
 
-        System.out.println("\nChange in " + selectedCurrency.name() + ":");
+        System.out.println("\nChange in " + selectedCurrency.name() +
+                " using " + strategy.getClass().getSimpleName().replace("ChangeStrategy", "")
+                + " Strategy:");
         System.out.println(purse);
     }
 

@@ -8,9 +8,10 @@ public class RegisterPanel extends JPanel {
     private JTextField amountField;
     private PursePanel changePanel;
     private JButton calculateButton;
+    private JComboBox<String> strategyCombo;
 
     public RegisterPanel() {
-        register = new Register();
+        register = new Register(Currency.CurrencyType.US, new GreedyChangeStrategy()); // Defaults
         setupUI();
     }
 
@@ -58,6 +59,15 @@ public class RegisterPanel extends JPanel {
         amountField = new JTextField(10);
         controlPanel.add(amountField, gbc);
 
+        // Strategy Selection
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        controlPanel.add(new JLabel("Algorithm:"), gbc);
+
+        gbc.gridx = 1;
+        strategyCombo = new JComboBox<>(new String[]{"Greedy", "Optimal"});
+        controlPanel.add(strategyCombo, gbc);
+
         // Calculate Button
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -71,7 +81,7 @@ public class RegisterPanel extends JPanel {
     }
 
     private void setupUI() {
-        changePanel = new PursePanel();
+        changePanel = new PursePanel(register);
         changePanel.setBackground(Color.WHITE);
         changePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
     }
@@ -80,19 +90,21 @@ public class RegisterPanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             try {
                 double amount = Double.parseDouble(amountField.getText());
-                if (amount <= 0) throw new NumberFormatException();
+                ChangeStrategy strategy = strategyCombo.getSelectedIndex() == 0
+                        ? new GreedyChangeStrategy()
+                        : new OptimalChangeStrategy();
 
-                register = new Register((Currency.CurrencyType)currencyCombo.getSelectedItem());
+                register.setStrategy(strategy);
+                register = new Register((Currency.CurrencyType)currencyCombo.getSelectedItem(), strategy);
                 Purse purse = register.makeChange(amount);
 
-                changePanel.removeAll();
                 changePanel.draw(purse);
                 changePanel.revalidate();
                 changePanel.repaint();
-            } catch (NumberFormatException ex) {
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(RegisterPanel.this,
-                        "Please enter a valid positive number",
-                        "Input Error", JOptionPane.ERROR_MESSAGE);
+                        "Error: " + ex.getMessage(), "Calculation Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }

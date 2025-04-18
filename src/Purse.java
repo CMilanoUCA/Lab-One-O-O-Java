@@ -8,8 +8,9 @@ public class Purse {
     }
 
     public void add(Denomination denom, int num) {
+     // adds a number of a particular Denomination
      cash.put(denom, num + cash.getOrDefault(denom, 0));
-    }                // adds a number of a particular denomination
+    }
 
 
     public double remove(Denomination denom, int num) {
@@ -22,19 +23,21 @@ public class Purse {
     }
 
     public double getValue() {
+        // returns the amount of money in the Purse
         double moneyCount = 0;
         for (Denomination denom : cash.keySet()) {
             moneyCount += cash.get(denom) * denom.amt;
         }
         return moneyCount;
-    } // returns the amount of money in the Purse
+    }
 
     public String toString() {
         String output = "";
         if (getValue() <= 0) {
             return "Empty Purse";
         }
-        for (Denomination denom : cash.keySet()) {  // Only loop through existing denominations
+        // Only loop through existing Denominations!
+        for (Denomination denom : cash.keySet()) {
             if (cash.get(denom) > 0) {
                 output += cash.get(denom) + " " + denom.name + " " + denom.form + "\n";
             }
