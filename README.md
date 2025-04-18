@@ -35,3 +35,6 @@ class implementing ChangeStrategy is created and filled out with code performing
 conversions pertaining to their respective algorithms. I considered measuring the amount of time
 taken to perform the calculations for each strategy, but decided against it since the times were
 indistinguishable from a normal user anyways; there is a difference, though, so the code works.
+
+## GitHub Repository Link (Don't know why you'd need this considering where you got the README from...)
+https://github.com/CMilanoUCA/Lab-One-O-O-Java
